@@ -7,9 +7,9 @@
 ### Glossary
 
 1. **[Home](./index.md)**
-2. **[Environment Setup](docs/network.md)**
-3. **[Navigation](docs/navigation.md.md)**
-4. **[State Management](docs/state.md.md)**
+2. **[Environment Setup](docs/setup.md)**
+3. **[Navigation](docs/navigation.md)**
+4. **[State Management](docs/state.md)**
 5. **[Network Management](docs/network.md)**
 
 <br />
