@@ -1,7 +1,7 @@
 ---
-title: Navigation
+title: Navigation (Expo Router)
 layout: default
-nav_order: 3
+nav_order: 4
 ---
 
 # Navigation ( with Expo Router)
@@ -59,13 +59,9 @@ To have a route available within a tab stack without displaying the tab button, 
 ## Sources
 
 <a>https://docs.expo.dev/router/</a>
+
 <a>https://docs.expo.dev/router/advanced/root-layout/</a>
+
 <a>https://docs.expo.dev/router/advanced/tabs/</a>
+
 <a>https://docs.expo.dev/router/advanced/stack/</a>
-
-<br />
-<br />
-
-##### Disclaimer
-
-<small>Keep in mind that this guideline will keep getting updated with new information and is not a full detailed manual of all Expo Router functionalities. Instead, it is a guide to understanding the basic operation and structure of both the automatic part and what matters when using the Expo Router. For more precise details about a specific functionality, please refer to the documentation. If you find any incorrect information, please contact the development team.</small>
