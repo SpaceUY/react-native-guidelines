@@ -51,23 +51,22 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
     - `.detoxrc.js`
     - `e2e/jest.config.js`
     - `e2e/starter.test.js`
-      </br>
 
 7.  In the `.detoxrc.js` file, configure the binary path and the build command:
 
     ```javascript
     module.exports = {
-      …
+      . . .
       configurations: {
         "ios.sim.release": {
-          …
+          . . .
           app: {
             binaryPath: "ios/build/Build/Products/Release-iphonesimulator/YourApp.app",
             build: "xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -configuration Release -sdk iphonesimulator",
           },
         },
         "android.emu.release": {
-          …
+          . . .
           app: {
             binaryPath: "android/app/build/outputs/apk/release/app-release.apk",
             build: "cd android && ./gradlew assembleRelease",
@@ -76,8 +75,6 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
       },
     };
     ```
-
-    </br>
 
 8.  For Android, an additional configuration is required:
 
@@ -92,17 +89,17 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
         targetSdkVersion = 30
     +    kotlinVersion = 'X.Y.Z' // (2)
     }
-    …
+    . . .
     dependencies {
         classpath("com.android.tools.build:gradle:7.1.1")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("de.undercouch:gradle-download-task:5.0.1")
     +    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion") // (3)
-    …
+    . . .
 
     allprojects {
         repositories {
-            …
+            . . .
             google()
         +    maven { // (4)
         +      url("$rootDir/../node_modules/detox/Detox-android")
@@ -121,17 +118,17 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
     In the `android/app/build.gradle` file, add the following lines:
 
     ```javascript
-    …
+    . . .
 
     android {
-    …
+    . . .
     defaultConfig {
-        …
+        . . .
         versionCode 1
         versionName "1.0"
     +    testBuildType System.getProperty('testBuildType', 'debug')
     +    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-    …
+    . . .
     buildTypes {
         release {
         minifyEnabled true
@@ -141,7 +138,7 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
         signingConfig signingConfigs.release
         }
     }
-    …
+    . . .
 
     dependencies {
     +  androidTestImplementation('com.wix:detox:+')
@@ -149,11 +146,9 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
     implementation fileTree(dir: "libs", include: ["*.jar"])
     ```
 
-       </br>
+    ### Adding an auxiliary Android test
 
-    #### Adding an auxiliary Android test
-
-    Detox requires that your project has a single dummy native Android test with some special content, which will be picked up by testRunner that you just added in the previous step, so let's create it now.</br>
+    Detox requires that your project has a single dummy native Android test with some special content, which will be picked up by testRunner that you just added in the previous step, so let's create it now.
     Copy the snippet below to create a file under the following path `android/app/src/androidTest/java/com/<your.package>/DetoxTest.java` (where <your.package> is your actual package name):
 
     ```javascript
@@ -191,7 +186,7 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
     (2) - Usually not the case, but you might have a custom activity name instead of a default MainActivity. To check whether it is so or not, open your `android/app/src/main/AndroidManifest.xml`, and check what your main activity is called.
     ```
 
-    #### Enabling unencrypted traffic for Detox
+    ### Enabling unencrypted traffic for Detox
 
     Create a new network security config file for Android (or patch it if you have one):
 
@@ -213,7 +208,7 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
     ```javascript
     <manifest>
     <application
-    …
+    . . .
     +    android:networkSecurityConfig="@xml/network_security_config">
     </application>
     </manifest>
@@ -221,12 +216,9 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
 
     Your Android app is ready to be used with Detox.
 
-    </br>
-
-9.  Build the app:</br>
+9.  Build the app:
     To build the app with detox run:
 
-    </br>
     IOS Debug:
 
     ```sh
@@ -239,8 +231,6 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
     detox build --configuration ios.sim.release
     ```
 
-     </br>
-
     Android Debug:
 
     ```sh
@@ -252,8 +242,6 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
     ```sh
     detox build --configuration android.emu.release
     ```
-
-    </br>
 
 10. Create your first example test with Detox:
 
@@ -293,8 +281,6 @@ This guide is a quick and simple introduction on how to use Detox for end-to-end
     (3) - Detox provides many options to match an element `by.id()`, `by.label()`, `by.text()` and more. The most common way to match elements is either by id or text.
     (4) - Detox provides many actions on elements such as tap(), swipe(), scroll().
     ```
-
-    </br>
 
 11. Running tests
     ```sh
