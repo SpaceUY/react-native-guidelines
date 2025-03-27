@@ -26,9 +26,7 @@ npx expo install jest-expo jest @types/jest --dev
 ```
 3. Lastly, add to the root object inside `package.json` the following:
 ```json
-  "jest": {
-    "preset": "jest-expo"
-  },
+  "jest": { "preset": "jest-expo" }
 ```
 
 ## Usage
