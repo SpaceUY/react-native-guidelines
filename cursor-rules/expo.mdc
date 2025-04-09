@@ -1,0 +1,364 @@
+You are an expert in TypeScript, React Native, Expo, and Mobile UI development.
+
+Code Style and Structure
+- Write concise, technical TypeScript code with accurate examples.
+- Use functional and declarative programming patterns; avoid classes.
+- Prefer iteration and modularization over code duplication.
+- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
+- Structure files: exported component, subcomponents, helpers, static content, types.
+- Follow Expo's official documentation for setting up and configuring your projects: https://docs.expo.dev/
+- Keep components focused on a single responsibility.
+- Break down complex screens into smaller, reusable components.
+- Use PureComponent or React.memo for list items to prevent unnecessary re-renders.
+
+Naming Conventions
+- Use lowercase with dashes for directories (e.g., components/auth-wizard).
+- Favor named exports for components.
+- Use descriptive names for style properties.
+- Event handlers should be named with a "handle" prefix (e.g., handlePress, handleSubmit).
+
+TypeScript Usage
+- Use TypeScript for all code; prefer interfaces over types.
+- Avoid enums; use maps instead.
+- Use functional components with TypeScript interfaces.
+- Use strict mode in TypeScript for better type safety.
+- Type navigation parameters using TypeScript for safer navigation:
+  ```tsx
+  // Define type-safe navigation
+  type RootStackParamList = {
+    Home: undefined;
+    Profile: { userId: string; username: string };
+    Settings: undefined;
+  };
+
+  // Type-safe navigation usage
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  ```
+
+Syntax and Formatting
+- Use the "function" keyword for pure functions.
+- Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements.
+- Use declarative JSX.
+- Use Prettier for consistent code formatting.
+
+UI and Styling
+- Use Expo's built-in components for common UI patterns and layouts.
+- Implement responsive design with Flexbox and Expo's useWindowDimensions for screen size adjustments.
+- Use styled-components or Tailwind CSS for component styling.
+- Implement dark mode support using Expo's useColorScheme.
+- Ensure high accessibility (a11y) standards using ARIA roles and native accessibility props.
+- Leverage react-native-reanimated and react-native-gesture-handler for performant animations and gestures.
+- Use StyleSheet.create for defining styles:
+  ```jsx
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: spacing.medium,
+      backgroundColor: colors.background,
+    },
+    title: {
+      fontSize: typography.sizes.large,
+      fontWeight: typography.weights.bold,
+      color: colors.text.primary,
+    },
+  });
+  ```
+- Consider a theming system for consistent colors, spacing, and typography.
+- Use Platform.OS for platform-specific code:
+  ```jsx
+  import { Platform, StyleSheet } from 'react-native';
+  
+  const styles = StyleSheet.create({
+    container: {
+      ...Platform.select({
+        ios: {
+          shadowColor: 'black',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.2,
+          shadowRadius: 4,
+        },
+        android: {
+          elevation: 4,
+        },
+      }),
+    },
+  });
+  ```
+- Create platform-specific files (e.g., Component.ios.js, Component.android.js) for larger platform differences.
+
+Safe Area Management
+- Use SafeAreaProvider from react-native-safe-area-context to manage safe areas globally in your app.
+- Wrap top-level components with SafeAreaView to handle notches, status bars, and other screen insets on both iOS and Android.
+- Use SafeAreaScrollView for scrollable content to ensure it respects safe area boundaries.
+- Avoid hardcoding padding or margins for safe areas; rely on SafeAreaView and context hooks.
+
+Performance Optimization
+- Minimize the use of useState and useEffect; prefer context and reducers for state management.
+- Use Expo's AppLoading and SplashScreen for optimized app startup experience.
+- Optimize images: use WebP format where supported, include size data, implement lazy loading with expo-image.
+- Implement code splitting and lazy loading for non-critical components with React's Suspense and dynamic imports.
+- Profile and monitor performance using React Native's built-in tools and Expo's debugging features.
+- Avoid unnecessary re-renders by memoizing components and using useMemo and useCallback hooks appropriately.
+- Use FlatList or SectionList instead of mapping over arrays for list rendering:
+  ```jsx
+  <FlatList
+    data={items}
+    renderItem={({ item }) => <ItemComponent item={item} />}
+    keyExtractor={item => item.id.toString()}
+    getItemLayout={(data, index) => ({
+      length: 80, // Item height
+      offset: 80 * index,
+      index,
+    })}
+    initialNumToRender={10}
+    maxToRenderPerBatch={10}
+    windowSize={5}
+    onEndReachedThreshold={0.5}
+    onEndReached={handleLoadMore}
+  />
+  ```
+- Use FastImage for better image loading and caching.
+- Clean up resources in useEffect's return function:
+  ```jsx
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener('change', handleOrientationChange);
+    
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+  ```
+- Use Hermes JavaScript engine for improved performance.
+
+Navigation
+- Use react-navigation for routing and navigation; follow its best practices for stack, tab, and drawer navigators.
+- Leverage deep linking and universal links for better user engagement and navigation flow.
+- Use dynamic routes with expo-router for better navigation handling.
+- Organize navigation into logical stacks (e.g., AuthStack, MainStack).
+
+State Management
+- Use React Context and useReducer for managing global state.
+- Leverage react-query for data fetching and caching; avoid excessive API calls.
+- For complex state management, consider using Zustand or Redux Toolkit.
+- Handle URL search parameters using libraries like expo-linking.
+- Use React Query or SWR for remote data fetching and caching.
+- Prefer local component state with useState for component-specific state:
+  ```jsx
+  // Local component state
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  
+  // Remote data with React Query
+  const { data, isLoading, error } = useQuery(
+    ['user', userId], 
+    () => fetchUserData(userId)
+  );
+  ```
+
+Error Handling and Validation
+- Use Zod for runtime validation and error handling.
+- Implement proper error logging using Sentry or a similar service.
+- Prioritize error handling and edge cases:
+  - Handle errors at the beginning of functions.
+  - Use early returns for error conditions to avoid deeply nested if statements.
+  - Avoid unnecessary else statements; use if-return pattern instead.
+  - Implement global error boundaries to catch and handle unexpected errors.
+- Use expo-error-reporter for logging and reporting errors in production.
+- Use try/catch for async operations:
+  ```jsx
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const data = await api.getUser(userId);
+      setUser(data);
+    } catch (error) {
+      setError('Unable to load user data. Please try again.');
+      logErrorToService(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  ```
+- Provide user-friendly error messages.
+
+Native Features & APIs
+- Use react-native-community packages when available.
+- Follow best practices for permissions handling:
+  ```jsx
+  import { Camera } from 'expo-camera';
+  
+  const [hasPermission, setHasPermission] = useState(null);
+  
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+  
+  if (hasPermission === null) {
+    return <View><Text>Requesting camera permission...</Text></View>;
+  }
+  if (hasPermission === false) {
+    return <View><Text>No access to camera</Text></View>;
+  }
+  ```
+- Test native functionality on actual devices, not just simulators.
+- Consider device capabilities when using hardware features.
+- Provide fallbacks for unsupported features.
+- Handle permissions appropriately and explain why they're needed.
+
+Testing
+- Write unit tests using Jest specifically for complex business logic:
+  ```jsx
+  // Example Jest test for utility function
+  import { formatCurrency } from '../utils/formatters';
+  
+  describe('formatCurrency', () => {
+    it('formats numbers to currency correctly', () => {
+      expect(formatCurrency(1000)).toBe('$1,000.00');
+      expect(formatCurrency(1000.5)).toBe('$1,000.50');
+    });
+    
+    it('handles zero values', () => {
+      expect(formatCurrency(0)).toBe('$0.00');
+    });
+    
+    it('handles negative values', () => {
+      expect(formatCurrency(-1000)).toBe('-$1,000.00');
+    });
+  });
+  ```
+- Reserve unit testing for complex logic only, not simple UI components
+- Use Detox exclusively for end-to-end testing of critical user flows:
+  ```jsx
+  // Example Detox E2E test
+  describe('Login flow', () => {
+    beforeAll(async () => {
+      await device.launchApp();
+    });
+  
+    beforeEach(async () => {
+      await device.reloadReactNative();
+    });
+  
+    it('should login successfully', async () => {
+      await element(by.id('email')).typeText('test@example.com');
+      await element(by.id('password')).typeText('password123');
+      await element(by.id('login-button')).tap();
+      
+      // Verify we reached the home screen
+      await expect(element(by.text('Dashboard'))).toBeVisible();
+    });
+  });
+  ```
+- Use React Native Testing Library sparingly, primarily for complex component interactions
+- Test core user flows thoroughly with Detox on both iOS and Android devices
+- Set up proper CI/CD integration for automated Detox tests
+- Configure Detox to run on device farms for testing on multiple real devices
+
+Accessibility
+- Use proper accessibilityLabel props for all touchable elements:
+  ```jsx
+  <TouchableOpacity
+    accessibilityLabel="Profile picture"
+    accessibilityRole="button"
+    accessibilityHint="Opens the full profile picture"
+    onPress={handlePress}
+  >
+    <Image source={profileImage} />
+  </TouchableOpacity>
+  ```
+- Group related elements with accessibilityRole.
+- Test with VoiceOver (iOS) and TalkBack (Android).
+- Support dynamic text sizes with Dynamic Type (iOS) and scalable text (Android).
+- Maintain sufficient color contrast (at least 4.5:1 for normal text).
+- Support dark mode for both iOS and Android.
+- Ensure all interactive elements are keyboard accessible.
+- Use semantic HTML elements.
+- Implement proper ARIA attributes.
+
+Security
+- Sanitize user inputs to prevent XSS attacks.
+- Use react-native-encrypted-storage for secure storage of sensitive data.
+- Ensure secure communication with APIs using HTTPS and proper authentication.
+- Use Expo's Security guidelines to protect your app: https://docs.expo.dev/guides/security/
+
+Internationalization (i18n)
+- Use react-native-i18n or expo-localization for internationalization and localization.
+- Support multiple languages and RTL layouts.
+- Ensure text scaling and font adjustments for accessibility.
+
+App Deployment & Updates
+- Consider using CodePush or Expo Updates for deploying JavaScript updates without app store review.
+- Implement proper versioning for updates.
+- Test updates thoroughly before deployment.
+- Implement proper app bundle splitting.
+- Remove unused code and dependencies.
+- Monitor bundle size with tools like Metro bundle analyzer.
+- Example in app.json:
+  ```json
+  {
+    "android": {
+      "jsEngine": "hermes"
+    },
+    "ios": {
+      "jsEngine": "hermes"
+    }
+  }
+  ```
+
+Project Structure
+- Organize by feature rather than by type.
+- Keep related files close to each other.
+- Use consistent naming conventions.
+- Example structure:
+  ```
+  /src
+    /features
+      /auth
+        - AuthScreen.tsx
+        - LoginForm.tsx
+        - authApi.ts
+        - authHooks.ts
+        - authStyles.ts
+      /profile
+        - ProfileScreen.tsx
+        - ProfileHeader.tsx
+        - ...
+    /components
+      /common
+        - Button.tsx
+        - Card.tsx
+        - ...
+    /navigation
+      - AppNavigator.tsx
+      - AuthNavigator.tsx
+      - ...
+    /hooks
+      - useForm.ts
+      - useToggle.ts
+      - ...
+    /utils
+      - format.ts
+      - validation.ts
+      - ...
+    /constants
+      - colors.ts
+      - typography.ts
+      - ...
+  ```
+
+Key Conventions
+1. Rely on Expo's managed workflow for streamlined development and deployment.
+2. Prioritize Mobile Web Vitals (Load Time, Jank, and Responsiveness).
+3. Use expo-constants for managing environment variables and configuration.
+4. Use expo-permissions to handle device permissions gracefully.
+5. Implement expo-updates for over-the-air (OTA) updates.
+6. Follow Expo's best practices for app deployment and publishing: https://docs.expo.dev/distribution/introduction/
+7. Ensure compatibility with iOS and Android by testing extensively on both platforms.
+
+API Documentation
+- Use Expo's official documentation for setting up and configuring your projects: https://docs.expo.dev/
+
+Refer to Expo's documentation for detailed information on Views, Blueprints, and Extensions for best practices.
+    
