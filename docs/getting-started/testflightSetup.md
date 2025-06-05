@@ -2,7 +2,7 @@
 title: TestFlight Setup
 layout: default
 parent: Getting Started
-nav_order: 2
+nav_order: 3
 ---
 
 # TestFlight Setup (Work in Progress)
