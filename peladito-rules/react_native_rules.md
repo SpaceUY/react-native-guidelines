@@ -1,3 +1,9 @@
+---
+title: Best Practices
+layout: default
+nav_order: 14
+---
+
 # React Native Development Standards & Best Practices
 
 ## Code Quality & Maintainability

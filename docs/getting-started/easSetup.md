@@ -2,7 +2,7 @@
 title: EAS Setup
 layout: default
 parent: Getting Started
-nav_order: 1
+nav_order: 2
 ---
 
 # EAS Setup
@@ -25,10 +25,10 @@ You'll need an Expo account to use EAS. If you don't have one, you can create it
 eas login
 ```
 
-After logging in, configure your project with EAS:
+After logging in, initialize your project with EAS:
 
 ```bash
-eas configure
+eas init
 ```
 
 This will create your project in the EAS Dashboard if it doesn't exist yet and set up the necessary configuration in your project.
@@ -208,6 +208,42 @@ You'll also need to update your `eas.json`. Here's an example configuration that
 }
 ```
 
+## Environment Variables
+
+Environment variables are handled differently for local development versus EAS builds:
+
+### Local Development
+When running `expo start` or `expo run:ios/android`, your app will use:
+- `.env.local` file (created when you run `eas env:pull`)
+- This is primarily for development on your local machine
+
+To get your environment variables for local development:
+```bash
+eas env:pull preview 
+```
+
+This will create a `.env.local` file with the variables you've set for the `preview` environment in the EAS dashboard. You can also use `development` or `production` instead of `preview` to pull variables from those environments:
+
+
+### EAS Builds
+Each build profile handles environment variables in different ways:
+
+1. Build-time variables in `eas.json`:
+   - Variables needed during the build process
+   - Defined directly in the `env` section of each profile
+   - Example: `APP_ENV` to determine which app variant to build
+
+2. Runtime secrets in EAS Dashboard:
+   - Sensitive variables your app needs while running
+   - API keys, service credentials, etc.
+   - Kept secure and separate from your code
+   - Can be different per environment (development/preview/production)
+
+3. Secrets via `eas env:create`:
+   - Alternative way to add runtime secrets
+   - Creates secrets via CLI instead of Dashboard
+   - Same level of security as Dashboard secrets
+
 ## Building Your App
 
 Important: For physical devices and app store builds, you will need:
@@ -234,7 +270,7 @@ There are two ways to run your app during development:
    - Required for testing specific EAS build configurations
    - Needs manual simulator installation
 
-For regular development, use `expo run:ios` as it's more streamlined. Use `eas build` when you need to test specific build configurations or verify production builds.
+For regular development, use `npx expo run:ios` as it's more streamlined. Use `eas build` when you need to test specific build configurations or verify production builds.
 
 
 ### Local Development Builds
@@ -301,43 +337,6 @@ eas build --profile development --platform android
 ```
 
 If built with either of these commands, you or any other team member should be able to download the specific build from the EAS dashboard.
-
-
-## Environment Variables
-
-Environment variables are handled differently for local development versus EAS builds:
-
-### Local Development
-When running `expo start` or `expo run:ios/android`, your app will use:
-- `.env.local` file (created when you run `eas env:pull`)
-- This is primarily for development on your local machine
-
-To get your environment variables for local development:
-```bash
-eas env:pull preview 
-```
-
-This will create a `.env.local` file with the variables you've set for the `preview` environment in the EAS dashboard. You can also use `development` or `production` instead of `preview` to pull variables from those environments:
-
-
-### EAS Builds
-Each build profile handles environment variables in different ways:
-
-1. Build-time variables in `eas.json`:
-   - Variables needed during the build process
-   - Defined directly in the `env` section of each profile
-   - Example: `APP_ENV` to determine which app variant to build
-
-2. Runtime secrets in EAS Dashboard:
-   - Sensitive variables your app needs while running
-   - API keys, service credentials, etc.
-   - Kept secure and separate from your code
-   - Can be different per environment (development/preview/production)
-
-3. Secrets via `eas env:create`:
-   - Alternative way to add runtime secrets
-   - Creates secrets via CLI instead of Dashboard
-   - Same level of security as Dashboard secrets
 
 ## Additional Resources
 
