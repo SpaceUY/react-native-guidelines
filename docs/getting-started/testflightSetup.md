@@ -12,7 +12,7 @@ TestFlight serves as a beta testing platform for production builds. It's particu
 - Distributing beta versions to stakeholders
 - Validating app behavior in production environment
 
-Note: For testing development or staging environments, use development builds as described in the [EAS Setup guide](./easSetup.md).
+Note: For testing development or staging environments, use development builds as described in the [EAS Setup guide](/docs/getting-started/easSetup).
 
 This guide will help you submit your Expo app to TestFlight using EAS Submit.
 
