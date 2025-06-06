@@ -251,6 +251,19 @@ Important: For physical devices and app store builds, you will need:
 - A Google Play Developer account for Android
 - App signing credentials
 
+When building for physical iOS devices (both development and preview builds), your device needs to be registered in the provisioning profile. Don't worry though - EAS handles this for you:
+
+1. When you first try to build for a physical device, EAS will:
+   - Guide you through creating the necessary credentials
+   - Ask for your Apple account details
+   - Create or update the provisioning profile
+   - Register your device automatically
+
+2. To add more devices later:
+   - Run `eas device:create`
+   - Follow the prompts to register new devices
+   - EAS will automatically update your provisioning profile
+
 Note: You can build and run on simulators without these requirements.
 
 ### EAS Build vs expo run:ios
@@ -314,9 +327,25 @@ xcrun simctl install booted HelloWorldDevelopment.app
 
 Note: The .app name will match your project name followed by "Development" for development builds.
 
+### Installing on Physical Devices
 
+For physical iOS devices with development builds:
 
-This creates a development build on your machine, which should be faster than cloud builds during development.
+1. **Using QR Code** (Recommended):
+   - Find your build in the [EAS Dashboard](https://expo.dev)
+   - Scan the QR code with your device's camera
+   - Follow the installation prompts
+
+2. **Using AirDrop**:
+   - Download the IPA file to your Mac
+   - AirDrop it to your iOS device
+   - It should automatically install it once its download to the device
+
+**Important**: 
+- These methods only work for development and preview builds
+- Production builds must be distributed through TestFlight
+- Remember to read the section at the beginning about `eas device:create`. Your device must be registered in the development provisioning profile before you can install development builds. EAS will guide you through this process when you first try to install on a device.
+
 
 ### Cloud Builds
 
@@ -338,8 +367,60 @@ eas build --profile development --platform android
 
 If built with either of these commands, you or any other team member should be able to download the specific build from the EAS dashboard.
 
+## Submitting to App Stores
+
+After successfully creating your builds, you can submit them to the respective app stores:
+
+### iOS (TestFlight/App Store)
+
+You have two options for submitting to TestFlight:
+
+1. **Let EAS handle it** (recommended for new apps):
+```bash
+# Submit the iOS build
+eas submit -p ios
+```
+From here you can follow the prompts to select your desired build from EAS. Otherwise you can pass the `--id` flag from the dashboard to the previous command.
+
+EAS will create the app in App Store Connect if it doesn't exist.
+
+2. **Use existing App Store Connect app**:
+- If you already created the app in App Store Connect, add its ID to your `eas.json`:
+
+<small>You can find it in the App Information, under Apple ID</small>
+```json
+{
+  "submit": {
+      "production": {
+      "ios": {
+        "appleId": "info@spacedev.uy",
+        "ascAppId": "REPLACE_WITH_YOUR_APP_ID",
+        "bundleIdentifier": "com.space.helloworld"
+      }
+    }
+  }
+}
+```
+
+For more detailed instructions about TestFlight setup and submission, check out our [TestFlight Setup Guide](./testflightSetup.md).
+
+### Android (Play Store)
+
+**Important**: Before submitting, you must first:
+1. Create your app in the [Google Play Console](https://play.google.com/console)
+2. Set up your app signing key in EAS
+3. Make sure your package name matches what you set in Play Console
+
+Then you can submit your build:
+```bash
+# Submit the Android build
+eas submit -p android
+```
+
+Note: Make sure you have the necessary store credentials and your app meets the store guidelines before submitting.
+
 ## Additional Resources
 
 - [EAS Build Configuration](https://docs.expo.dev/build/configuration/)
 - [EAS Local Builds](https://docs.expo.dev/build/local-builds/)
-- [Environment Variables in EAS](https://docs.expo.dev/build/environment-variables/) 
+- [Environment Variables in EAS](https://docs.expo.dev/build/environment-variables/)
