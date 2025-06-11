@@ -182,3 +182,13 @@ Note: Make sure all your app's metadata and assets are ready before submitting. 
 - [EAS Submit to TestFlight Guide](https://docs.expo.dev/submit/ios/)
 - [TestFlight Documentation](https://developer.apple.com/testflight/)
 - [App Store Connect Help](https://help.apple.com/app-store-connect/) 
+
+#### Quick video guides
+
+- [EAS production build (iOS)](https://drive.google.com/file/d/1Fx1OgF_ECydT4M5nmjWh7GRjs0tNGp6E/view?usp=drive_link)
+
+- [Create AppStoreConnect app + EAS submit configs](https://drive.google.com/file/d/1eQtDFRx61CUXeGy8oXXl75KOz0UlFVWt/view?usp=drive_link)
+
+- [TestFlight internal tester invites](https://drive.google.com/file/d/1FPGyXQCOd7YjP5w65ls0DWrf4pfDzeQQ/view?usp=drive_link)
+
+- [Promoting to prod from TestFlight build](https://drive.google.com/file/d/1mVQUCGUPlvWi660jwPexsDrKWOc9b-4K/view?usp=drive_link)
