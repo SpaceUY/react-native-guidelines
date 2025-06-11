@@ -384,6 +384,9 @@ From here you can follow the prompts to select your desired build from EAS. Othe
 
 EAS will create the app in App Store Connect if it doesn't exist.
 
+Note: Make sure it properly sets the bundleIdentifier `com.space.helloworld` (in our example).
+Otherwise create the app manually in the Apple Developer Portal using the proper id (as seen in the the tutorial video)
+
 2. **Use existing App Store Connect app**:
 - If you already created the app in App Store Connect, add its ID to your `eas.json`:
 
@@ -424,3 +427,17 @@ Note: Make sure you have the necessary store credentials and your app meets the 
 - [EAS Build Configuration](https://docs.expo.dev/build/configuration/)
 - [EAS Local Builds](https://docs.expo.dev/build/local-builds/)
 - [Environment Variables in EAS](https://docs.expo.dev/build/environment-variables/)
+
+#### Quick video guides
+ - [EAS initial setup quick overview](https://drive.google.com/file/d/1sXnZKwPavo9G4gceAa0oNaummfFrKHGa/view?usp=drive_link)
+
+- [Local iOS simulator build](https://drive.google.com/file/d/1bPLJK79i_rpNRxzCCsShLWDtLHh3W9YB/view?usp=drive_link)
+
+- [Local Android build (for emulator or physical device)](https://drive.google.com/file/d/1Qr8fqAoEoU1SJssaqGJuQzoJ4Na5fE_4/view?usp=drive_link)
+
+- [EAS cloud build/install + Device register (iOS)](https://drive.google.com/file/d/1YkdamOXxrwXiOBCAX9OVZeLZjKti8jh2/view?usp=drive_link)
+
+- [EAS cloud build/install (Android)](https://drive.google.com/file/d/1f7V_ySPtdLraUjNS38MMRPBL0Ou5Ttpl/view?usp=drive_link)
+
+- [Local iOS builds](https://drive.google.com/file/d/1zDH1jKrJYSaZ-m5xhdjuNGq_Dp1NO_ya/view?usp=drive_link)
+
