@@ -20,36 +20,37 @@ For detailed information about installation, configuration, and usage, please re
 
 ## Available React Native Modules
 
-Our React Native modules include:
+Our React Native modules include configuration templates and boilerplate code. After installing a module, you'll need to install its required dependencies using your package manager (npm, yarn, bun, or pnpm).
 
 ### Template
 - **Expo Template**: React Native template with Expo and Expo Router navigation
-  - Includes: expo-router, expo-linking, expo-constants, expo-status-bar
+  - Required dependencies: expo-router, expo-linking, expo-constants, expo-status-bar
   - Comes with pre-configured EAS setup (see our [EAS Setup guide](./easSetup.md) for details)
 
 ### API Client
 - **TanStack**: Ready-to-use API client with Axios and TanStack Query
-  - Includes: @tanstack/react-query, axios
+  - Required dependencies: @tanstack/react-query, axios
 
 ### State Management
 - **Zustand**: Lightweight state management solution
-  - Includes: zustand
+  - Required dependencies: zustand
 
 ### Date Utilities
 - **date-fns**: Comprehensive date manipulation utilities
-  - Includes: date-fns
+  - Required dependencies: date-fns
 
 ### Testing
 - **Jest**: Unit and integration testing setup
-  - Includes: @testing-library/react-native, @testing-library/jest-native, jest-expo
+  - Required dependencies: @testing-library/react-native, @testing-library/jest-native, jest-expo
 - **Detox**: End-to-end testing configuration
-  - Includes: detox, @types/detox
+  - Required dependencies: detox, @types/detox
 
 ## After Installation
 
 After installing modules:
 1. The copied files are fully owned by your project
-2. You can modify them to fit your specific needs
-3. Changes are independent of the original templates
+2. Install the required dependencies for each module you've added
+3. You can modify the configurations to fit your specific needs
+4. Changes are independent of the original templates
 
 For questions about specific modules or contribution guidelines, reach out to the team through our internal channels. 
