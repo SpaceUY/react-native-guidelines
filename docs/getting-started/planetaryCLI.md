@@ -25,7 +25,7 @@ Our React Native modules include configuration templates and boilerplate code. A
 ### Template
 - **Expo Template**: React Native template with Expo and Expo Router navigation
   - Required dependencies: expo-router, expo-linking, expo-constants, expo-status-bar
-  - Comes with pre-configured EAS setup (see our [EAS Setup guide](./easSetup.md) for details)
+  - Comes with pre-configured EAS setup (see our [EAS Setup guide](https://spaceuy.github.io/react-native-guidelines/docs/getting-started/easSetup.html) for details)
 
 ### API Client
 - **TanStack**: Ready-to-use API client with Axios and TanStack Query
