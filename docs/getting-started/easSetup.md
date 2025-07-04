@@ -2,7 +2,7 @@
 title: EAS Setup
 layout: default
 parent: Getting Started
-nav_order: 2
+nav_order: 3
 ---
 
 # EAS Setup
@@ -421,6 +421,23 @@ eas submit -p android
 ```
 
 Note: Make sure you have the necessary store credentials and your app meets the store guidelines before submitting.
+
+
+## Labeling Release Notes
+
+### iOS
+
+When submitting builds to TestFlight, you can label your releases as staging or production to help your team quickly identify which builds are for internal testing and which are for production. **As of the latest EAS CLI versions, release notes must be added manually in App Store Connect after submission.**
+
+After your build is uploaded via `eas submit`, go to App Store Connect → TestFlight → Builds, select your build, and enter your release notes there. Use clear labels such as "Staging build – v1.0.3-beta" or "PRODUCTION build – v1.0.3" to distinguish between environments.
+
+### Android
+
+Similarly, for Android, release notes must be added manually in the Google Play Console after submitting your build. This helps testers and users understand what's new in each build.
+
+After your build is uploaded via `eas submit`, go to the Play Console, select your release, and enter your release notes. Use clear labels to indicate staging or production status, e.g., "Staging build – v1.0.3-beta" or "PRODUCTION build – v1.0.3".
+
+Keep your release notes clear and informative for both testers and end users!
 
 ## Additional Resources
 

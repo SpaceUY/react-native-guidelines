@@ -2,7 +2,7 @@
 title: Initial Setup
 layout: default
 parent: Getting Started
-nav_order: 1
+nav_order: 2
 ---
 
 ## Environment Setup
