@@ -30,6 +30,7 @@ Here's a sneak peek of what we cover:
 - **Best Practices**: Tips and tricks for writing efficient and maintainable code.
 - **Common Pitfalls**: Mistakes to avoid and how to fix them.
 - **Useful Tools**: Recommended tools and libraries that make our lives easier.
+- **Notifications**: Implementing push notifications with Firebase Cloud Messaging for iOS and Android.
 
 ## Let's Make It Happen!
 
