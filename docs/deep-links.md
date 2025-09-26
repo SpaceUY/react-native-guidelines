@@ -277,17 +277,14 @@ Always provide web fallbacks:
 
 - [Apple App Site Association Validator](https://branch.io/resources/aasa-validator/)
 - [Google Digital Asset Links Tester](https://developers.google.com/digital-asset-links/tools/generator)
-- [Universal Links Tester](https://search.developer.apple.com/appsearch-validation-tool)
 
 ## Useful Links
 
 - [Apple Universal Links Documentation](https://developer.apple.com/ios/universal-links/)
 - [Android App Links Documentation](https://developer.android.com/training/app-links)
-- [Expo Linking Documentation](https://docs.expo.dev/versions/latest/sdk/linking/)
-- [Expo Router Deep Links](https://docs.expo.dev/router/reference/linking/)
+- [Expo Docs: Android App Links](https://docs.expo.dev/linking/android-app-links/)
+- [Expo Docs: iOS Univesal Links](https://docs.expo.dev/linking/ios-universal-links/)
 
 ---
-
-**Last updated: September 26, 2025**
 
 Remember to test deep links thoroughly on both platforms and various scenarios. Keep your association files updated when changing domains or app configurations. Always provide graceful fallbacks for better user experience.
