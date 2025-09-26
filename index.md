@@ -4,9 +4,6 @@ layout: default
 nav_order: 1
 ---
 
-> [!IMPORTANT]
-> Something important
-
 # Welcome to the Mobile Team's React Native Code Guidelines!
 
 ![Mobile Development](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa25idWVmanJwOHVwMmV2Zm5td2Rkd2E1dTA4M3dxaTZyd3FxMjBnOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yBwgX64KAPrHW2ltZ2/giphy.webp)
