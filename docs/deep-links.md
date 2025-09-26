@@ -208,10 +208,9 @@ Both should return `200 OK` with `Content-Type: application/json`.
 1. **ADB Testing**:
 
    ```bash
-   adb shell am start \
-     -W -a android.intent.action.VIEW \
-     -d "https://www.myapp.com/profile/123" \
-     com.yourcompany.yourapp
+   adb shell am start -a android.intent.action.VIEW \
+     -c android.intent.category.BROWSABLE \
+     -d "http://wwww.myapp.com/reset-password?token=test"
    ```
 
 2. **Device Testing**:
