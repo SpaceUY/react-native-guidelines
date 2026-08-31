@@ -1,39 +1,37 @@
 ---
 title: Home
-layout: default
+layout: home
 nav_order: 1
 ---
 
-# Welcome to the Mobile Team's React Native Code Guidelines!
+# React Native Guidelines
 
-![Mobile Development](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExa25idWVmanJwOHVwMmV2Zm5td2Rkd2E1dTA4M3dxaTZyd3FxMjBnOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yBwgX64KAPrHW2ltZ2/giphy.webp)
+A practical, opinionated guide to how we build **React Native + Expo** apps.
+It exists so that any project feels familiar: same structure, same tools, same
+release flow. New here? Start with **Getting Started** and read top to bottom.
 
-Hey Team!
+Guidelines are here to help, not to police. If something is unclear or you
+disagree, open a PR — this guide should evolve with us.
 
-Welcome to our React Native Code Guidelines! 🎉 Here, you'll find everything you need to know about writing clean, efficient, and maintainable code for our mobile apps. Whether you're a seasoned developer or just getting started, these guidelines will help us all stay on the same page and produce top-notch code.
+## How to use this guide
 
-## Why Do We Need This?
+- **New to a project?** Getting Started → Project Architecture.
+- **Building a feature?** Jump straight to **Building Features**.
+- **Shipping a build?** Everything you need is in **Build & Distribution**.
+- **Looking something up?** Use search (top of the page) or the **Reference**.
+- **Using Claude Code (or another AI assistant)?** Start with **Claude** —
+  the bootstrap prompt and `CLAUDE.md` template.
 
-Great question! Consistency is key to our success. By following these guidelines, we can:
+## What's inside
 
-- **Collaborate Smoothly**: When everyone writes code in a similar way, it's easier to understand and work on each other's code.
-- **Maintain Quality**: Clean code is easier to debug, test, and maintain. This means fewer bugs and faster development!
-- **Onboard Quickly**: New team members can get up to speed faster if our codebase is consistent and well-documented.
-- **Enjoy the Process**: Let's face it, writing and reading clean code is just more fun!
-
-## What You'll Find Here
-
-Here's a sneak peek of what we cover:
-
-- **Code Structure**: How to organize files and folders in our projects.
-- **Styling**: Our rules for writing clean and readable code, including naming conventions and formatting.
-- **Best Practices**: Tips and tricks for writing efficient and maintainable code.
-- **Common Pitfalls**: Mistakes to avoid and how to fix them.
-- **Useful Tools**: Recommended tools and libraries that make our lives easier.
-- **Notifications**: Implementing push notifications with Firebase Cloud Messaging for iOS and Android.
-
-## Let's Make It Happen!
-
-Remember, these guidelines are here to help us, not to restrict us. Feel free to suggest improvements or ask questions anytime. Let's work together to keep our codebase clean, efficient, and fun to work with.
-
-Happy coding! 🚀
+| Section | You'll learn |
+| --- | --- |
+| Getting Started | Tooling, creating/cloning a project, running it |
+| Project Architecture | How we structure code and make decisions |
+| Building Features | Navigation, state, networking, forms, styling, and more |
+| Environment & Configuration | Env vars and per-environment builds |
+| Code Quality | TypeScript, linting, testing, CI |
+| Build & Distribution | Internal builds, devices, and store releases |
+| Best Practices | Conventions and common pitfalls |
+| Reference | Glossary, cheat sheets, and links |
+| Claude | How to prime Claude Code so it follows this guideline every project |

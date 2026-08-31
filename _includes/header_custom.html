@@ -1,0 +1,46 @@
+{%- comment -%}
+  Language switcher (i18n). Links to the equivalent page in the other
+  language by adding/removing the "/es" URL prefix — relies on the Spanish
+  content tree mirroring the English tree path-for-path (see
+  specs/2026-08-31-i18n-en-es-design.md).
+{%- endcomment -%}
+
+{%- assign current_lang = page.lang | default: "en" -%}
+{%- if current_lang == "es" -%}
+  {%- assign other_url = page.url | remove_first: "/es" -%}
+  {%- if other_url == "" -%}{%- assign other_url = "/" -%}{%- endif -%}
+  {%- assign other_label = "EN" -%}
+  {%- assign other_aria = "Switch to English" -%}
+  {%- assign current_label = "ES" -%}
+{%- else -%}
+  {%- assign other_url = "/es" | append: page.url -%}
+  {%- assign other_label = "ES" -%}
+  {%- assign other_aria = "Cambiar a español" -%}
+  {%- assign current_label = "EN" -%}
+{%- endif -%}
+
+<style>
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-right: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .lang-switcher-current {
+    opacity: 0.55;
+  }
+  .lang-switcher-link {
+    text-decoration: none;
+  }
+  .lang-switcher-link:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="lang-switcher" role="group" aria-label="Language switcher">
+  <span class="lang-switcher-current" aria-current="true">{{ current_label }}</span>
+  <a class="lang-switcher-link" href="{{ other_url | relative_url }}" aria-label="{{ other_aria }}">{{ other_label }}</a>
+</div>

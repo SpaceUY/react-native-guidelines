@@ -1,8 +1,60 @@
 title: React Native Guidelines
-description: Guidelines' document for the React Native team
+description: A modern, friendly guideline for building React Native + Expo apps.
 theme: just-the-docs
 
-url: https://spaceUY.github.io/react-native-guidelines
+# Publish target (edit for your GitHub Pages repo). Alternative to the pinned
+# gem above: comment out `theme:` and use `remote_theme: just-the-docs/just-the-docs`.
+url: https://spaceuy.github.io
+baseurl: /react-native-guidelines
+
+search_enabled: true
+search:
+  heading_level: 3
+  previews: 3
+
+color_scheme: dark
+heading_anchors: true
+
+callouts_level: quiet
+callouts:
+  note:
+    title: Note
+    color: blue
+  tip:
+    title: Tip
+    color: green
+  important:
+    title: Important
+    color: yellow
+  warning:
+    title: Warning
+    color: red
+  highlight:
+    color: purple
 
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  GitHub:
+    - "https://github.com/spaceuy/react-native-guidelines"
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+      lang: en
+  - scope:
+      path: "es"
+    values:
+      lang: es
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+  - scripts
+  - specs
+  - plans

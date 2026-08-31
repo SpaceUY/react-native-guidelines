@@ -1,20 +1,24 @@
-[![SpaceDev](./assets/img/spacedev.svg)](https://www.spacedev.io/)
+# React Native Guidelines
 
-## React Native Guidelines
+Source for our React Native + Expo team guideline (Jekyll + Just-the-Docs).
 
-### Website **[here](https://spaceuy.github.io/react-native-guidelines/)**
+## Run locally
 
-### Glossary
+```bash
+bundle install
+bundle exec jekyll serve   # http://localhost:4000/react-native-guidelines/
+                            # Spanish: http://localhost:4000/react-native-guidelines/es/
+```
 
-1. **[Home](./index.md)**
-2. **[Environment Setup](docs/setup.md)**
-3. **[Navigation](docs/navigation.md)**
-4. **[State Management](docs/state.md)**
-5. **[Network Management](docs/network.md)**
+## Check links
 
-<br />
-<br />
+```bash
+bundle exec jekyll build
+bundle exec htmlproofer ./_site --disable-external --allow-hash-href --ignore-empty-alt
+```
 
-##### Disclaimer
+## Publish
 
-<small>Keep in mind that this guideline will keep getting updated with new information and is not a full detailed manual of all Expo functionalities. Instead, it is a guide to understanding the basic operation and structure of both the automatic part and what matters when using the Expo. For more precise details about a specific functionality, please refer to the documentation. If you find any incorrect information, please contact the development team.</small>
+Deploys to GitHub Pages. With the pinned `just-the-docs` gem, publish via a
+GitHub Actions Pages workflow. To publish without Actions, switch `_config.yml`
+to `remote_theme: just-the-docs/just-the-docs`.
