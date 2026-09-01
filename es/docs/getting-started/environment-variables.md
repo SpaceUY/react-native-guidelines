@@ -6,11 +6,44 @@ nav_order: 3
 
 # Variables de Entorno
 
-Copiá la plantilla y completá los valores:
+Mantenemos **un archivo de entorno por ambiente**, cada uno ignorado por git,
+más una única plantilla commiteada:
+
+| Archivo | Ambiente | En git |
+| --- | --- | --- |
+| `.env.dev` | development | ignorado |
+| `.env.preview` | preview | ignorado |
+| `.env.prod` | production | ignorado |
+| `.env.example` | plantilla (valores dummy) | commiteado |
+
+Los **nombres** de las variables son iguales entre ambientes — solo cambian los
+valores — así que un único `.env.example` los documenta a todos. Copialo en
+cada archivo de ambiente y completá los valores reales:
 
 ```bash
-cp .env.example .env
+cp .env.example .env.dev       # repetí para .env.preview y .env.prod
 ```
+
+## Cargar el archivo correcto
+
+Elegí el archivo por ambiente con
+[`env-cmd`](https://www.npmjs.com/package/env-cmd) (una devDependency) en los
+scripts de tu `package.json`:
+
+```json
+"scripts": {
+  "start":         "env-cmd -f .env.dev expo start",
+  "start:preview": "env-cmd -f .env.preview expo start",
+  "start:prod":    "env-cmd -f .env.prod expo start"
+}
+```
+
+Dale a cada archivo su propio `APP_ENV` (`development` / `preview` /
+`production`) así los valores de runtime que carga `env-cmd` y la config de
+build-time que elige el `app.config.ts` dinámico quedan en sync desde una sola
+fuente. (`dotenv-cli` funciona igual si ya lo usás.) En los builds de EAS los
+valores siguen viniendo del bloque `env` del perfil correspondiente en
+`eas.json` — ver **Configuración en Tiempo de Compilación**.
 
 ## El prefijo `EXPO_PUBLIC_`
 
@@ -33,9 +66,18 @@ tokens, contraseñas). Esos van en el backend o en los secrets de EAS. Ver
 
 ## Qué se commitea
 
-- `.env` — tus valores locales. **Ignorado por git. Nunca lo commitees.**
+- `.env.dev`, `.env.preview`, `.env.prod` — tus valores reales por ambiente.
+  **Ignorados por git. Nunca los commitees.**
 - `.env.example` — la plantilla con valores vacíos o de ejemplo. **Se
   commitea**, así todos saben qué variables necesita un proyecto.
+
+## Por qué un archivo por ambiente
+
+- **Aislamiento** — una wallet o credencial de dev/test en `.env.dev` nunca
+  puede terminar empaquetada en un build de preview o de producción.
+- **Sin herramientas bloqueadas** — las wallets y keys reales viven solo en
+  archivos ignorados por git, nunca en contenido trackeado, así Claude Code y
+  los scanners de secretos no se bloquean al detectar una key.
 
 Para el panorama completo — configuración de runtime vs. build-time y cómo
 `APP_ENV` selecciona un ambiente — ver **Entorno y Configuración**.
