@@ -16,6 +16,14 @@ más una única plantilla commiteada:
 | `.env.prod` | production | ignorado |
 | `.env.example` | plantilla (valores dummy) | commiteado |
 
+{: .note-title }
+Nota
+
+{: .note }
+Si venís de otro stack, **`preview` es nuestro "staging"** — el ambiente
+interno, pre-producción. Lo llamamos `preview` para que coincida con el build
+profile `preview` de EAS de Expo y el valor `APP_ENV=preview`.
+
 Los **nombres** de las variables son iguales entre ambientes — solo cambian los
 valores — así que un único `.env.example` los documenta a todos. Copialo en
 cada archivo de ambiente y completá los valores reales:

@@ -16,6 +16,11 @@ committed template:
 | `.env.prod` | production | ignored |
 | `.env.example` | template (dummy values) | committed |
 
+{: .note }
+If you're coming from another stack, **`preview` is our "staging"** — the
+internal, pre-production environment. We call it `preview` to match Expo's EAS
+`preview` build profile and the `APP_ENV=preview` value.
+
 The variable **names** are the same across environments — only the values
 differ — so one `.env.example` documents them all. Copy it into each
 environment file and fill in the real values:
