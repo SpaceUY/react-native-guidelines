@@ -50,6 +50,11 @@ export default () => ({ expo: getDynamicAppConfig(APP_ENV) });
 `env`), así que nunca lo seteás a mano — elegir un profile elige el
 ambiente. Ver **Compilación y Distribución → Conceptos**.
 
+Localmente, `env-cmd -f .env.<env>` carga los valores de runtime de ese
+ambiente mientras `APP_ENV` (que cada archivo `.env.<env>` puede definir)
+selecciona la config nativa correspondiente acá — las dos capas quedan
+alineadas. Ver **Primeros Pasos → Variables de Entorno**.
+
 {: .note-title }
 Nota
 

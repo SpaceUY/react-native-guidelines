@@ -50,6 +50,11 @@ export default () => ({ expo: getDynamicAppConfig(APP_ENV) });
 you never set it by hand — picking a profile picks the environment. See
 **Build & Distribution → Concepts**.
 
+Locally, `env-cmd -f .env.<env>` loads that environment's runtime values while
+`APP_ENV` (which each `.env.<env>` file can define) selects the matching native
+config here — the two layers stay aligned. See **Getting Started → Environment
+Variables**.
+
 {: .note }
 Pair this with `appVersionSource: "remote"` and `autoIncrement: true` in
 `eas.json` so EAS manages build numbers for you instead of hand-editing them.
