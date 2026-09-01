@@ -32,6 +32,11 @@ Los metadatos de submit (Apple ID, App Store app id, bundle id) viven en el
 bloque `submit.production` de `eas.json`, así que no los pasás por línea de
 comandos.
 
+Cuando `eas submit` termina, el build está subido pero **no publicado** — queda
+en TestFlight (iOS) o en un track de Play (Android). Ver
+[Publicación en las Tiendas](store-submission.html) para los pasos en la consola
+que lo llevan a producción.
+
 {: .note-title }
 Nota
 

@@ -31,6 +31,11 @@ configured yet, EAS walks you through creating one.
 Submit metadata (Apple ID, App Store app id, bundle id) lives in the
 `submit.production` block of `eas.json`, so you don't pass it on the command line.
 
+Once `eas submit` finishes, the build is uploaded but **not live** — it's sitting
+in TestFlight (iOS) or a Play track (Android). See
+[Store Submission](store-submission.html) for the console steps that take it to
+production.
+
 {: .note }
 With EAS **cloud** build credits you can build without `--local` and then submit
 the most recent cloud build with `--latest` (no `--path` needed):

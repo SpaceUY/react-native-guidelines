@@ -1,7 +1,7 @@
 ---
 title: Solución de Problemas
 parent: Compilación y Distribución
-nav_order: 7
+nav_order: 8
 ---
 
 # Solución de Problemas
