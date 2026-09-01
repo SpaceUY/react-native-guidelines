@@ -8,8 +8,8 @@ nav_order: 3
 
 La regla es simple: **los secretos nunca llegan al cliente.**
 
-- `.env` guarda tus valores locales y está **ignorado por git** — nunca lo
-  commitees.
+- `.env.dev`, `.env.preview` y `.env.prod` guardan tus valores por ambiente y
+  están **ignorados por git** — nunca los commitees.
 - `.env.example` está **commiteado** como plantilla, con valores vacíos o de
   ejemplo.
 - Un secreto exclusivo del servidor **no debe** usar el prefijo
@@ -21,7 +21,7 @@ La regla es simple: **los secretos nunca llegan al cliente.**
 
 | Tipo de valor | Dónde vive |
 | --- | --- |
-| Configuración pública (URL base de la API, client id público) | `EXPO_PUBLIC_*` en `.env` |
+| Configuración pública (URL base de la API, client id público) | `EXPO_PUBLIC_*` en `.env.<env>` |
 | Secreto de build-time (firma, tokens de servicio para CI) | Secret de EAS |
 | Secreto de servidor (API keys privadas, credenciales de DB) | Solo backend — nunca en la app |
 

@@ -8,7 +8,8 @@ nav_order: 3
 
 The rule is simple: **secrets never reach the client.**
 
-- `.env` holds your local values and is **git-ignored** — never commit it.
+- `.env.dev`, `.env.preview`, and `.env.prod` hold your per-environment values
+  and are **git-ignored** — never commit them.
 - `.env.example` is **committed** as the template, with empty or dummy values.
 - A server-only secret must **not** use the `EXPO_PUBLIC_` prefix (that prefix
   ships the value inside the app). Put it in an **EAS secret** for builds, or
@@ -18,7 +19,7 @@ The rule is simple: **secrets never reach the client.**
 
 | Value type | Where it lives |
 | --- | --- |
-| Public config (API base URL, public client id) | `EXPO_PUBLIC_*` in `.env` |
+| Public config (API base URL, public client id) | `EXPO_PUBLIC_*` in `.env.<env>` |
 | Build-time secret (signing, service tokens for CI) | EAS secret |
 | Server secret (private API keys, DB credentials) | Backend only — never in the app |
 
