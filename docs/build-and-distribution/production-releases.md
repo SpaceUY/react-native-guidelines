@@ -16,7 +16,9 @@ eas build --profile production --platform ios --local --output ./build/app-produ
 eas submit --profile production --platform ios --path ./build/app-production.ipa
 ```
 
-From App Store Connect you then send the build to TestFlight or to review.
+{: .important }
+> **From App Store Connect you then send the build to TestFlight or to review.**
+> `eas submit` only uploads the binary — it does **not** submit it anywhere on its own.
 
 ## Android → Google Play
 

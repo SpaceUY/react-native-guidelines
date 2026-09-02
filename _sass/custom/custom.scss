@@ -1,0 +1,36 @@
+// ---------------------------------------------------------------------------
+// Callout title legibility (dark color scheme)
+//
+// With `callouts_level: quiet`, Just the Docs does NOT flip callout hues for
+// the dark scheme, so titles/borders render with the darkest hue (e.g.
+// $blue-300 = #183385) on top of the dark body background (#27262b) — the
+// blue "NOTE" title is nearly unreadable. We force the bright hue (-000) for
+// the title text and the left border so every callout title stands out.
+// ---------------------------------------------------------------------------
+
+$callout-accents: (
+  "note": $blue-000,      // #2c84fa
+  "tip": $green-000,      // #41d693
+  "important": $yellow-000, // #ffeb82
+  "warning": $red-000,    // #f77e7e
+  "highlight": $purple-000, // #7253ed
+);
+
+@each $name, $accent in $callout-accents {
+  p.#{$name},
+  blockquote.#{$name} {
+    border-left-color: $accent;
+
+    // Title generated from the callout's `title:` (rendered via ::before)
+    &::before {
+      color: $accent;
+      font-size: 0.8em;
+      letter-spacing: 0.03em;
+    }
+
+    // Title when using the explicit `{: .<name>-title }` block syntax
+    > .#{$name}-title {
+      color: $accent;
+    }
+  }
+}
