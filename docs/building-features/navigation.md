@@ -33,6 +33,7 @@ app/
 
 Redirect unauthenticated users from a layout:
 
+{% raw %}
 ```tsx
 // app/(app)/_layout.tsx
 import { Redirect, Stack } from "expo-router";
@@ -45,6 +46,7 @@ export default function AppLayout() {
   return <Stack screenOptions={{ headerShown: false }} />;
 }
 ```
+{% endraw %}
 
 ## Navigating
 

@@ -34,6 +34,7 @@ app/
 
 Redirigí a los usuarios no autenticados desde un layout:
 
+{% raw %}
 ```tsx
 // app/(app)/_layout.tsx
 import { Redirect, Stack } from "expo-router";
@@ -46,6 +47,7 @@ export default function AppLayout() {
   return <Stack screenOptions={{ headerShown: false }} />;
 }
 ```
+{% endraw %}
 
 ## Navegar
 
