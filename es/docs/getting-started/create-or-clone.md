@@ -30,27 +30,28 @@ pnpm install
 Nota
 
 {: .note }
-Algunos proyectos commitean las carpetas `ios/` y `android/` (el workflow
-"bare"); otros las generan a demanda con `npx expo prebuild`. Cualquiera de
-las dos está bien — solo tenés que saber en cuál estás. La sección **Entorno
-y Configuración** explica cómo un `app.config.ts` dinámico maneja los
-identificadores nativos por ambiente.
+El default del equipo es el **workflow managed con Continuous Native
+Generation (CNG)**: las carpetas `ios/` y `android/` nunca se commitean. Se
+generan a demanda — local con `npx expo prebuild`, o de forma transparente en
+EAS Build — a partir de `app.config.ts` y los paquetes instalados. Ver
+**Primeros Pasos → Workflow Managed (CNG)** para la justificación completa y
+qué hacer cuando un SDK nativo necesita más que un config plugin.
 
 ## Higiene de Git: tu `.gitignore`
 
-`create-expo-app` incluye un `.gitignore` sólido para el workflow **managed**.
-Apenas commiteás las carpetas `ios/` y `android/` (bare) o corrés
-`npx expo prebuild`, también heredás sus **artefactos de build** — y esos _no_
-están en el template por defecto. Si terminan en git, cada compañero se baja
-cientos de MB de artefactos compilados y los diffs se vuelven ilegibles.
+`create-expo-app` incluye un `.gitignore` sólido para el workflow **managed**
+— el default de esta guía de abajo lo extiende ignorando `/ios` y `/android`
+directamente, no solo sus subcarpetas de build. Si un proyecto se desvía de
+ese default y commitea las carpetas nativas igual, también hereda sus
+**artefactos de build**, que son fáciles de pasar por alto e inflan cada clon
+con cientos de MB de artefactos compilados.
 
 {: .warning-title }
 Advertencia
 
 {: .warning }
 **Los builds no van en el repo.** Las apps compiladas (`*.apk`, `*.aab`,
-`*.ipa`), las carpetas de build nativas (`ios/build/`, `android/app/build/`) y
-los caches de dependencias (`ios/Pods/`, `node_modules/`) son todos _generados_
+`*.ipa`) y los caches de dependencias (`node_modules/`) son todos _generados_
 — se regeneran desde el código en cada build. Commitearlos infla el historial
 de forma irreversible.
 
@@ -66,12 +67,11 @@ dist/
 web-build/
 expo-env.d.ts
 
-# Artefactos de build nativos — generados, nunca commitear
-ios/build/
-android/build/
-android/app/build/
-android/.gradle/
-android/.cxx/
+# Carpetas nativas — generadas por CNG, nunca commitear (ver Workflow Managed)
+/ios
+/android
+
+# Binarios de app compilados — generados en cada build
 *.apk
 *.aab
 *.ipa
@@ -79,20 +79,11 @@ android/.cxx/
 *.dSYM
 *.dSYM.zip
 
-# CocoaPods (se restaura con `pod install`)
-ios/Pods/
-ios/.xcode.env.local
-
-# Config local de la máquina (Android)
-android/local.properties
-
 # Metro / bundler
 .metro-health-check*
 *.jsbundle
 
 # Material de firma y secretos — nunca commitear
-*.keystore
-!debug.keystore
 *.p8
 *.p12
 *.key
@@ -119,26 +110,34 @@ yarn-error.*
 
 Algunas notas sobre las entradas que suelen confundir:
 
-- **`!debug.keystore`** — el keystore de *debug* compartido de Android se puede
-  commitear tranquilo para que todos tengan la misma firma de debug. Tu keystore
-  de **release** es un secreto: mantenelo fuera del repo (guardalo en EAS o en un
+- **No hay debug keystore de Android para commitear.** Con el default managed,
+  `android/` no se commitea en absoluto, así que no hay un `debug.keystore`
+  compartido al que hacerle una excepción. Cada máquina (y EAS) usa su propia
+  firma de debug; si una feature realmente necesita un SHA-1 de debug
+  compartido (ej. Google Sign-In), manejalo como credencial de EAS, no como
+  archivo commiteado. Tu keystore de **release** siempre es un secreto,
+  cualquiera sea el workflow: mantenelo fuera del repo (guardalo en EAS o en un
   gestor de secretos).
 - Los **archivos `.env.*`** (`.env.dev`, `.env.preview`, `.env.prod`) se
   ignoran; **`.env.example`** se commitea. Mirá **Variables de Entorno** y
   **Entorno y Configuración → Secretos** para la regla completa — y rotá
   cualquier cosa que se filtre en el historial de git.
-- **Config de Firebase** (`google-services.json`, `GoogleService-Info.plist`): si
-  un proyecto las genera por ambiente en tiempo de build, ignoralas; si commitea
-  una única config no secreta, commiteala. Decidilo una vez por proyecto y
-  documentalo en el `README` del repo.
+- **Config de Firebase** (`google-services.json`, `GoogleService-Info.plist`):
+  con el default managed no pueden vivir dentro de `ios/`/`android/` (no se
+  commitean), así que apuntalas desde afuera — ej. una ruta en la raíz
+  referenciada vía `googleServicesFile` en `app.config.ts`, que un config
+  plugin copia al proyecto generado en el `prebuild`. Si ese archivo en sí es
+  seguro de commitear (normalmente es un identificador no secreto por
+  proyecto) es una decisión que se toma una vez por proyecto y se documenta en
+  el `README` del repo.
 
 {: .note-title }
 Nota
 
 {: .note }
-Si un artefacto de build _ya_ está trackeado, agregarlo al `.gitignore` no lo
-elimina — Git solo ignora cambios de archivos *no trackeados*. Dejá de trackearlo
-con `git rm -r --cached ios/build android/app/build` (ajustá las rutas) y después
-commiteá.
+Si `ios/`, `android/`, o un artefacto de build _ya_ está trackeado, agregarlo
+al `.gitignore` no lo elimina — Git solo ignora cambios de archivos *no
+trackeados*. Dejá de trackearlo con `git rm -r --cached ios android` (ajustá
+las rutas para una limpieza más acotada) y después commiteá.
 
 Siguiente: configurá tus **Variables de Entorno**.
