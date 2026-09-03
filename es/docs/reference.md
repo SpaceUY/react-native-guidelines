@@ -17,6 +17,9 @@ nav_order: 9
 | **Dev client** | Un build a medida de tu app que incluye sus módulos nativos (a diferencia de Expo Go). |
 | **App Distribution** | El canal gratuito de Firebase para entregar builds de prueba a testers. |
 | **`APP_ENV`** | El selector de entorno (`development` / `preview` / `production`) que maneja la configuración dinámica. |
+| **CNG** | Continuous Native Generation — el enfoque de Expo de generar `ios/`/`android/` a demanda en vez de commitearlas. |
+| **Prebuild** | El comando `npx expo prebuild` que ejecuta el CNG — genera los proyectos nativos a partir de `app.config.ts` y los config plugins instalados. |
+| **Config plugin** | Una función que modifica el proyecto nativo generado durante el `prebuild` (ej. agregar un permiso, una clave de `Info.plist`, una dependencia de Gradle). |
 | **Barrel** | Un `index.ts` que re-exporta la superficie pública de un módulo. |
 
 ## Links
