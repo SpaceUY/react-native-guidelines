@@ -1,7 +1,7 @@
 ---
 title: Running the App
 parent: Getting Started
-nav_order: 4
+nav_order: 5
 ---
 
 # Running the App
