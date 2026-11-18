@@ -52,6 +52,10 @@ desarrollo.
 pnpm add github:SpaceUY/expo-wallet-provisioning#v1.0.0
 ```
 
+El paquete se compila al instalarse, y pnpm lo bloquea hasta que se habilita: la primera
+instalación falla e imprime la línea de `allowBuilds` para agregar a `pnpm-workspace.yaml` (o
+corré `pnpm approve-builds`). Ver el README del paquete.
+
 ```ts
 // app.config.ts → plugins
 ['expo-wallet-provisioning', {
@@ -88,8 +92,9 @@ const { walletState, isAdding, add } = useAddToWallet({
     cardholderName: card.nameOnCard,
     billingAddress, // opcional: completa el formulario de facturación de Google Wallet
   },
-  fetchApplePayData: (request) => api.post('/cards/me/wallet/apple-pay', request).then((r) => r.data),
-  fetchGooglePayData: (request) => api.post('/cards/me/wallet/google-pay', request).then((r) => r.data),
+  // El template de NestJS envuelve las respuestas como { success, data }: devolvé el objeto de adentro.
+  fetchApplePayData: (request) => api.post('/cards/me/wallet/apple-pay', request).then((r) => r.data.data),
+  fetchGooglePayData: (request) => api.post('/cards/me/wallet/google-pay', request).then((r) => r.data.data),
   onError: () => showToast(t('card.walletAddError')),
 });
 ```
@@ -162,6 +167,10 @@ Usá el módulo `wallet-provisioning` del template de NestJS. La app llama a:
 |---|---|---|
 | `POST /cards/me/wallet/apple-pay` | `{ cardId?, certificates, nonce, nonceSignature }` | `{ activationData, encryptedPassData, ephemeralPublicKey }` |
 | `POST /cards/me/wallet/google-pay` | `{ cardId?, serverSessionId }` | `{ opc, googleOpc }` |
+
+Las respuestas exitosas del template llegan envueltas como `{ success: true, data: <respuesta> }` (los
+errores como `{ success: false, statusCode, message }`); las funciones de fetch del hook devuelven el
+objeto de adentro.
 
 El proyecto implementa de dónde salen las tarjetas (`CardResolver`) y qué pasa cuando un usuario
 deja el alta sin terminar (`WalletProvisioningHooks`: mandar una push de recordatorio; Apple lo
