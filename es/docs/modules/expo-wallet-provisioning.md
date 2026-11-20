@@ -205,8 +205,9 @@ pide). El README del módulo cubre la configuración y los webhooks.
 
 **Apple:**
 
-- Video 1: app → botón → hoja de Apple → "Agregada a Apple Wallet".
-- Video 2: Wallet → "+" → la app → tarjeta agregada (necesita la Wallet Extension).
+- Video manual: Wallet → "+" → tarjeta a mano → OTP → activa (además confirma que el BIN está habilitado).
+- Video de push: app → botón → hoja de Apple → "Agregada a Apple Wallet".
+- Video de la Wallet Extension: Wallet → "+" → la app → tarjeta agregada.
 - El recordatorio de alta abandonada.
 
 ## Visa

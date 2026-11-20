@@ -193,8 +193,9 @@ The module's README covers configuration and webhooks.
 
 **Apple:**
 
-- Video 1: app → button → Apple's sheet → "Added to Apple Wallet".
-- Video 2: Wallet → "+" → the app → card added (needs the Wallet extension).
+- Manual video: Wallet → "+" → card by hand → OTP → active (it also confirms the BIN is enabled).
+- Push video: app → button → Apple's sheet → "Added to Apple Wallet".
+- Wallet extension video: Wallet → "+" → the app → card added.
 - The reminder for an abandoned flow.
 
 ## Visa
