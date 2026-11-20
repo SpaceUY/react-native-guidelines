@@ -149,7 +149,7 @@ plano.
 
 ### Wallet Extension de Apple
 
-Permite agregar la tarjeta desde **Wallet → "+"** (el video 2 de la revisión de Apple). Copiá
+Permite agregar la tarjeta desde **Wallet → "+"** (el video 3 de la revisión de Apple). Copiá
 `templates/apple-wallet-extension/` del paquete y seguí su README. Las reglas que no cambian: la
 extensión sin interfaz nunca refresca la sesión, la extensión con interfaz pide Face ID y
 refresca una sola vez, y el arte de la tarjeta va dentro de la extensión.

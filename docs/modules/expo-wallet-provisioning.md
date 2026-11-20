@@ -139,7 +139,7 @@ background.
 
 ### Apple Wallet extension
 
-Lets users add the card from **Wallet → "+"** (Apple's review video 2). Copy
+Lets users add the card from **Wallet → "+"** (Apple's review video 3). Copy
 `templates/apple-wallet-extension/` from the package and follow its README. The rules that
 cannot change: the non-UI extension never refreshes the session, the UI extension asks for Face
 ID and refreshes once, and the card art ships inside the extension.
