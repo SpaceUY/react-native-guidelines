@@ -36,6 +36,8 @@ desarrollo.
 
 ## Requisitos externos
 
+El proceso paso a paso (formularios, registro en la consola, videos de revisión, allowlists, congelamientos de fin de año) está en **Módulos → Alta en las wallets**. Esta tabla es el resumen.
+
 | Quién | Qué pedir | Qué entregás | Notas |
 |---|---|---|---|
 | **Apple** (a través del procesador o la red) | Entitlement de in-app provisioning (`com.apple.developer.payment-pass-provisioning`) para la app **y** las dos extensiones de Wallet | Team ID y bundle IDs | Se concede por bundle ID. Firmar otro bundle con él (un build `-dev`) rompe el build |
@@ -218,5 +220,6 @@ confirmar en cada proyecto, con el procesador:
 
 ## Ver también
 
+- **Módulos → Alta en las wallets**: el proceso no técnico con Apple, Google y el procesador
 - **Arquitectura del Proyecto → SDKs Nativos Sin Plugin de Expo**
 - El `README.md` del paquete (API) y su `RELEASE.md` (lo que el CI no puede verificar)

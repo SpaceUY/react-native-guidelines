@@ -32,6 +32,8 @@ processor's setup each take weeks and happen in parallel with development.
 
 ## External requirements
 
+The step-by-step process (forms, console registration, review videos, allowlists, year-end freezes) is on **Modules → Wallet store onboarding**. This table is the summary.
+
 | Who | What to ask for | What you hand over | Notes |
 |---|---|---|---|
 | **Apple** (through the processor or the card network) | In-app provisioning entitlement (`com.apple.developer.payment-pass-provisioning`) for the app **and** both Wallet extensions | Team ID and bundle IDs | Granted per bundle ID. Signing any other bundle with it (a `-dev` build) fails the build |
@@ -206,5 +208,6 @@ confirm per project, with the processor:
 
 ## See also
 
+- **Modules → Wallet store onboarding**: the non-code process with Apple, Google and the processor
 - **Project Architecture → Native SDKs Without an Expo Plugin**
 - The package's `README.md` (API) and `RELEASE.md` (what CI cannot check)
