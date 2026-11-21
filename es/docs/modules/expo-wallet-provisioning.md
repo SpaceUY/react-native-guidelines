@@ -44,7 +44,7 @@ El proceso paso a paso (formularios, registro en la consola, videos de revisión
 | **Apple** | La app asociada al producto de tarjeta (`associatedApplicationIdentifiers`) | Team ID + bundle ID | Lo configura el procesador o la red |
 | **Apple** | Provisioning profiles regenerados | — | Después de que se concede el entitlement |
 | **Google** | Acceso al SDK TapAndPay desde el portal de emisores | Solicitud de emisor | Bajo NDA, por emisor. **Nunca lo commitees en un repo compartido** |
-| **Google** | La app en el allowlist de Google | Package name y huellas del certificado de firma | Confirmá la lista exacta de huellas en el checklist de lanzamiento vigente de Google |
+| **Google** | La app en el allowlist de Google | Package name y **las dos huellas SHA-256**: la de la clave de firma de apps de Play y la de la clave de subida | Mandale las mismas huellas al procesador. Ver **Alta en las wallets** |
 | **Google** | Revisión de UX | Un PDF del flujo (declarando el aprovisionamiento por rebote), videos y capturas | Ver **Checklist de revisión** |
 | **Procesador** | Credenciales, habilitación del BIN en la red, las apps registradas, webhooks de tokens | Bundle IDs, package name, URLs de webhooks | Ver **Procesador: Pomelo** |
 
@@ -53,6 +53,8 @@ El proceso paso a paso (formularios, registro en la consola, videos de revisión
 ```bash
 pnpm add github:SpaceUY/expo-wallet-provisioning#v1.0.0
 ```
+
+Hasta que exista el tag `v1.0.0`, fijá un commit de `main` (`#<commit>`).
 
 El paquete se compila al instalarse, y pnpm lo bloquea hasta que se habilita: la primera
 instalación falla e imprime la línea de `allowBuilds` para agregar a `pnpm-workspace.yaml` (o
@@ -105,7 +107,7 @@ Qué mostrar según `walletState`:
 
 | `walletState` | iOS | Android |
 |---|---|---|
-| `CAN_ADD` | `<AddPassButton onPress={add} />` | `<GoogleWalletButton locale="es-419" onPress={add} isBusy={isAdding} />` |
+| `CAN_ADD` | `<AddPassButton onPress={add} />` | `<GoogleWalletButton locale="es-419" accessibilityLabel="Agregar a la Billetera de Google" onPress={add} isBusy={isAdding} />` |
 | `ADDED` | Texto: "Agregada a Apple Wallet" | Texto: "Agregada a la Billetera de Google" |
 | `UNAVAILABLE` | Nada | Nada |
 
@@ -196,10 +198,12 @@ pide). El README del módulo cubre la configuración y los webhooks.
 
 **Google** (confirmalo contra el checklist de lanzamiento vigente de Google):
 
-- Un video por caso: **a)** teléfono sin Google Wallet, **b)** tarjeta agregada y la app muestra
-  "Agregada", **c)** tarjeta borrada desde Wallet y la app vuelve a mostrar el botón, **d)** una
-  tarjeta esperando verificación de identidad (el botón la retoma).
-- Aprovisionamiento por rebote desde Google Wallet hasta la pantalla de la tarjeta.
+- Un video por caso (5 videos, con la numeración de **Alta en las wallets**): **1)** wallet nueva:
+  teléfono sin Google Wallet, **2)** manual + estado: tarjeta agregada a mano, la app oculta el
+  botón y lo vuelve a mostrar cuando se borra la tarjeta, **3)** borrar tarjeta: push desde la
+  app, se borra en Wallet y vuelve el botón, **4)** camino amarillo: una tarjeta esperando
+  verificación de identidad (el botón la retoma), **5)** rebote: desde Google Wallet hasta la
+  pantalla de la tarjeta.
 - Capturas de la pantalla con el botón y del estado de éxito.
 - Sin número de tarjeta, CVC ni vencimiento en ningún video ni captura.
 

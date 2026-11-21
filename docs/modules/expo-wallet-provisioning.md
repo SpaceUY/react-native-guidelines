@@ -40,7 +40,7 @@ The step-by-step process (forms, console registration, review videos, allowlists
 | **Apple** | The app associated with the card product (`associatedApplicationIdentifiers`) | Team ID + bundle ID | Configured by the processor or network |
 | **Apple** | Regenerated provisioning profiles | — | After the entitlement is granted |
 | **Google** | Access to the TapAndPay SDK from the issuer portal | Issuer application | Under NDA, per issuer. **Never commit it to a shared repo** |
-| **Google** | The app in Google's allowlist | Package name and the signing certificate fingerprints | Confirm the exact list of fingerprints in Google's current launch checklist |
+| **Google** | The app in Google's allowlist | Package name and **both SHA-256 fingerprints**: Play's app signing key and the upload key | Send the same fingerprints to the processor. See **Wallet store onboarding** |
 | **Google** | UX review | A PDF of the flow (declaring bounce provisioning), videos and screenshots | See **Review checklist** |
 | **Processor** | Credentials, network enablement of the BIN, the apps registered, token webhooks | Bundle IDs, package name, webhook URLs | See **Processor: Pomelo** |
 
@@ -49,6 +49,8 @@ The step-by-step process (forms, console registration, review videos, allowlists
 ```bash
 pnpm add github:SpaceUY/expo-wallet-provisioning#v1.0.0
 ```
+
+Until the `v1.0.0` tag exists, pin a commit of `main` instead (`#<commit>`).
 
 The package builds on install, and pnpm blocks that until it is allowed: the first install fails
 and prints the `allowBuilds` line to add to `pnpm-workspace.yaml` (or run `pnpm approve-builds`).
@@ -98,7 +100,7 @@ Render by `walletState`:
 
 | `walletState` | iOS | Android |
 |---|---|---|
-| `CAN_ADD` | `<AddPassButton onPress={add} />` | `<GoogleWalletButton locale="es-419" onPress={add} isBusy={isAdding} />` |
+| `CAN_ADD` | `<AddPassButton onPress={add} />` | `<GoogleWalletButton locale="es-419" accessibilityLabel="Add to Google Wallet" onPress={add} isBusy={isAdding} />` |
 | `ADDED` | Text: "Added to Apple Wallet" | Text: "Added to Google Wallet" |
 | `UNAVAILABLE` | Nothing | Nothing |
 
@@ -184,10 +186,11 @@ The module's README covers configuration and webhooks.
 
 **Google** (confirm against Google's current launch checklist):
 
-- One video per case: **a)** phone without Google Wallet, **b)** card added, then the app shows
-  "Added", **c)** card removed from Wallet, then the app shows the button again, **d)** a card
-  waiting for identity verification (the button resumes it).
-- Bounce provisioning from Google Wallet into the card screen.
+- One video per case (5 videos, numbered as in **Wallet store onboarding**): **1)** new wallet:
+  phone without Google Wallet, **2)** manual + state: card added by hand, the app hides the
+  button and shows it again when the card is removed, **3)** remove card: push from the app, then
+  removed in Wallet and the button returns, **4)** yellow path: a card waiting for identity
+  verification (the button resumes it), **5)** bounce: from Google Wallet into the card screen.
 - Screenshots of the screen with the button and of the success state.
 - No card number, CVC or expiry date in any video or screenshot.
 

@@ -17,6 +17,9 @@ El proceso no técnico que hay que recorrer para que la tarjeta de un programa e
 | **Desarrollo** | Implementa el push provisioning en la app (iOS y Android) y los webhooks en el backend. |
 | **QA / grabación** | Graba los videos de certificación en dispositivos reales. |
 
+{: .important-title }
+Importante
+
 {: .important }
 **Apple y Google no funcionan igual.** En Apple, el procesador intermedia todo: entitlement, envío de videos y aprobación del emisor. En Google, el procesador solo aporta el allowlist y la configuración del TSP (MDES/VTS). El registro, los contratos, la UX, las huellas y los videos los hace el emisor desde **su propia consola** de Google Pay & Wallet.
 
@@ -28,6 +31,9 @@ El proceso no técnico que hay que recorrer para que la tarjeta de un programa e
 4. **Google:** perfil del emisor, NDA y CTA, vínculo con el agregador, UX, paquete y huellas, y videos de App Review.
 5. Configurar los webhooks de tokenización y verificarlos.
 6. Esperar la aprobación final de cada wallet.
+
+{: .warning-title }
+Advertencia
 
 {: .warning }
 **Planificá los congelamientos de fin de año.** Apple congela las altas de emisores aproximadamente entre mediados de noviembre y principios de enero. Google congela cambios a fin de noviembre (en 2026: del 20-nov al 1-dic, sin pedidos de allowlist hasta el día siguiente). Conviene tener todo enviado antes.
