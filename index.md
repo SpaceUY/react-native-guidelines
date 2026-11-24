@@ -33,5 +33,6 @@ disagree, open a PR — this guide should evolve with us.
 | Code Quality | TypeScript, linting, testing, CI |
 | Build & Distribution | Internal builds, devices, and store releases |
 | Best Practices | Conventions and common pitfalls |
+| Modules | Reusable SpaceDev modules: wallet provisioning and store onboarding |
 | Reference | Glossary, cheat sheets, and links |
 | Claude | How to prime Claude Code so it follows this guideline every project |

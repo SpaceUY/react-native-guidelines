@@ -1,6 +1,6 @@
 ---
 title: Claude
-nav_order: 10
+nav_order: 11
 ---
 
 # Claude

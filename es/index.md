@@ -37,5 +37,6 @@ estás de acuerdo, abrí un PR — esta guía debe evolucionar con nosotros.
 | Calidad de Código | TypeScript, linting, testing, CI |
 | Compilación y Distribución | Builds internos, dispositivos y lanzamientos a las tiendas |
 | Buenas Prácticas | Convenciones y errores comunes |
+| Módulos | Módulos reutilizables de SpaceDev: aprovisionamiento en wallets y alta en las tiendas |
 | Referencia | Glosario, hojas de referencia rápida y links |
 | Claude | Cómo preparar a Claude Code para que siga esta guía en cada proyecto |
